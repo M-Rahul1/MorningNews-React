@@ -11,30 +11,31 @@ const News = (props)=>{
     const [page, setPage] = useState(1)
     const [totalResults, setTotalResults] = useState(0)
     // document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
-    
+
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    } 
+    }
 
     const updateNews = async ()=> {
-        props.setProgress(10);
+        // props.setProgress(10);
         const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`; 
         setLoading(true)
         let data = await fetch(url);
-        props.setProgress(30);
+        // props.setProgress(30);
         let parsedData = await data.json()
-        props.setProgress(70);
+        // props.setProgress(70);
         setArticles(parsedData.articles)
         setTotalResults(parsedData.totalResults)
         setLoading(false)
-        props.setProgress(100);
+        // props.setProgress(100);
 
     }
 
     useEffect(() => {
-        updateNews(); 
+        console.log("send req")
+        updateNews();
     }, [])
- 
+
 
     const handlePrevClick = async () => {
         setPage(page-1)
